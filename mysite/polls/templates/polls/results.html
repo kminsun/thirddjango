@@ -1,0 +1,25 @@
+{% load static %}
+
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+    {% for choice in votes_orderby %}
+        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+
+    {% endfor %}
+    {{ votes_all }}
+{#    {% for choice in question.choice_set.all %}#}
+{#        {% if choice.votes  %}#}
+
+{#        {% endif %}#}
+{#    {%  endfor %}#}
+
+    {% for etc_data in question.etc_data_set.all %}
+        <li>{{  etc_data }} -- {{ etc_data.votes }} vote{{ etc_data.votes|pluralize }}</li>
+    {%  endfor %}
+
+    <br>최다득표 : {{ votes_orderby.0 }}
+
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
